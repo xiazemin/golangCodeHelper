@@ -1,0 +1,99 @@
+{
+  "name": "golangCodeHelper",
+  "displayName": "golangCodeHelper",
+  "description": "golang code helper to generate structs from json,sql,curl and so on",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:golangCodeHelper.helloWorld",
+    "onCommand:golangCodeHelper.JsonToGo",
+    "onCommand:golangCodeHelper.CurlToGo",
+    "onCommand:golangCodeHelper.CurlToGoStructs"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "golangCodeHelper.helloWorld",
+        "title": "golang编码辅助工具集"
+      },
+			{
+				"command": "golangCodeHelper.JsonToGo",
+				"title": "json生成go结构体(JsonToGo)",
+				"category": "golangCodeHelper"
+			},
+			{
+				"command": "golangCodeHelper.CurlToGo",
+				"title": "curl生成go代码(CurlToGo)",
+				"category": "生成golang代码或者结构体"
+			},
+      {
+				"command": "golangCodeHelper.CurlToGoStructs",
+				"title": "curl生成go结构体(CurlToGoStructs)",
+				"category": "生成golang代码或者结构体"
+			}
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+					"command": "golangCodeHelper.JsonToGo",
+          "when": "!explorerResourceIsFolder",
+					"group": "2_workspace@1"
+				},
+				{
+          "group": "2_workspace@2",
+          "when": "!explorerResourceIsFolder",
+					"submenu": "golangCodeHelper/submenu/generate"
+        }
+      ],
+      "golangCodeHelper/submenu/generate": [
+				{
+					"command": "golangCodeHelper.CurlToGo",
+					"group": "1_generate@1"
+				},
+        {
+					"command": "golangCodeHelper.CurlToGoStructs",
+					"group": "1_generate@2"
+				}
+      ]
+    },
+    "submenus": [
+			{
+				"id": "golangCodeHelper/submenu/generate",
+				"label": "生成golang代码或者结构体"
+			}
+		]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.75.0",
+    "@types/glob": "^8.0.1",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "@typescript-eslint/parser": "^5.49.0",
+    "eslint": "^8.33.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.1.0",
+    "typescript": "^4.9.4",
+    "ts-loader": "^9.4.2",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "@vscode/test-electron": "^2.2.2"
+  }
+}
